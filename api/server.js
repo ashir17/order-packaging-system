@@ -4,32 +4,33 @@ const serverless = require('serverless-http');
 const app = express();
 app.use(express.json());
 
-// ITEMS (NO SEPARATE FILE)
+// Items data
 const items = [
   { id: 1, name: 'Item 1', price: 120, weight: 200 },
-  { id: 2, name: 'Item 2', price: 90, weight: 300 },
-  { id: 3, name: 'Item 3', price: 80, weight: 250 },
-  { id: 4, name: 'Item 4', price: 60, weight: 280 },
+  { id: 2, name: 'Item 2', price: 90,  weight: 300 },
+  { id: 3, name: 'Item 3', price: 80,  weight: 250 },
+  { id: 4, name: 'Item 4', price: 60,  weight: 280 },
   { id: 5, name: 'Item 5', price: 150, weight: 180 },
   { id: 6, name: 'Item 6', price: 110, weight: 220 },
   { id: 7, name: 'Item 7', price: 200, weight: 350 },
-  { id: 8, name: 'Item 8', price: 50, weight: 100 },
-  { id: 9, name: 'Item 9', price: 70, weight: 150 },
-  { id: 10, name: 'Item 10', price: 90, weight: 190 }
+  { id: 8, name: 'Item 8', price: 50,  weight: 100 },
+  { id: 9, name: 'Item 9', price: 70,  weight: 150 },
+  { id: 10,name: 'Item 10',price: 130, weight: 400 }
 ];
 
+// Courier prices
 const courierPrices = [
   { min: 0, max: 500, price: 10 },
   { min: 501, max: 1000, price: 15 },
   { min: 1001, max: 2000, price: 20 }
 ];
 
-// GET ITEMS
+// GET /items
 app.get('/items', (req, res) => {
   res.json(items);
 });
 
-// PLACE ORDER
+// POST /place-order
 app.post('/place-order', (req, res) => {
   const selectedItems = req.body;
 
@@ -49,7 +50,6 @@ app.post('/place-order', (req, res) => {
       currentPrice = 0;
       currentWeight = 0;
     }
-
     currentItems.push(item);
     currentPrice += item.price;
     currentWeight += item.weight;
