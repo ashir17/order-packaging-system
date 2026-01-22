@@ -1,9 +1,16 @@
 const express = require('express');
 const serverless = require('serverless-http');
-const items = require('../items'); // items.js in root
+//const items = require('../items'); // items.js in root
 const app = express();
 
 app.use(express.json());
+const items = [
+  { id: 1, name: "Item 1", price: 120, weight: 200 },
+  { id: 2, name: "Item 2", price: 90, weight: 300 },
+  { id: 3, name: "Item 3", price: 80, weight: 250 },
+  { id: 4, name: "Item 4", price: 60, weight: 280 },
+  { id: 5, name: "Item 5", price: 150, weight: 180 }
+];
 
 // Get all items
 app.get('/items', (req, res) => {
