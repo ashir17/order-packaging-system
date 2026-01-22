@@ -9,7 +9,8 @@ const items = [
   { id: 2, name: "Item 2", price: 90, weight: 300 },
   { id: 3, name: "Item 3", price: 80, weight: 250 },
   { id: 4, name: "Item 4", price: 60, weight: 280 },
-  { id: 5, name: "Item 5", price: 150, weight: 180 }
+  { id: 5, name: "Item 5", price: 150, weight: 180 },
+  { id: 6, name: "Item 6", price: 250, weight: 200 }
 ];
 
 // Get all items
