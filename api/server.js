@@ -55,4 +55,4 @@ app.post('/place-order', (req, res) => {
 });
 
 // Export as serverless handler
-module.exports.handler = serverless(app);
+module.exports = serverless(app);
