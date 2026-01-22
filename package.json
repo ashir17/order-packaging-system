@@ -1,17 +1,12 @@
 {
-  "name": "orderspliter-vercel",
+  "name": "order-packaging-system",
   "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
+  "main": "api/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node api/server.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
-    "express": "^5.2.1"
+    "express": "^4.18.2",
+    "serverless-http": "^3.0.0"
   }
 }
