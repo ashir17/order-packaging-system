@@ -27,7 +27,20 @@
 $(document).ready(function() {
 
   // Load items
-  $.get('/api/items', function(items) {
+ $.get('/api/items', function(items) {
+    items.forEach(item => {
+        $('#items').append(`
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox"
+                       value='${JSON.stringify(item)}' id="item${item.id}">
+                <label class="form-check-label" for="item${item.id}">
+                    ${item.name} - $${item.price} - ${item.weight}g
+                </label>
+            </div>
+        `);
+    });
+});
+
     items.forEach(item => {
       $('#items').append(`
         <div class="form-check">
