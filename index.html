@@ -15,7 +15,9 @@
     <div class="card-body">
       <h5>Select Items</h5>
       <div id="items" class="mb-3"></div>
+
       <button id="order" class="btn btn-success">Place Order</button>
+
       <hr>
       <h5>Result</h5>
       <pre id="result" class="bg-dark text-white p-3 rounded"></pre>
@@ -24,54 +26,47 @@
 </div>
 
 <script>
-$(document).ready(function() {
+$(document).ready(function () {
 
   // Load items
- $.get('/api/items', function(items) {
-    items.forEach(item => {
+  $.get('/api/items')
+    .done(function (items) {
+      items.forEach(item => {
         $('#items').append(`
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox"
-                       value='${JSON.stringify(item)}' id="item${item.id}">
-                <label class="form-check-label" for="item${item.id}">
-                    ${item.name} - $${item.price} - ${item.weight}g
-                </label>
-            </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox"
+              value='${JSON.stringify(item)}'
+              id="item${item.id}">
+            <label class="form-check-label" for="item${item.id}">
+              ${item.name} - $${item.price} - ${item.weight}g
+            </label>
+          </div>
         `);
+      });
+    })
+    .fail(function () {
+      alert('Failed to load items from server');
     });
-});
-
-    items.forEach(item => {
-      $('#items').append(`
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox"
-            value='${JSON.stringify(item)}' id="item${item.id}">
-          <label class="form-check-label" for="item${item.id}">
-            ${item.name} - $${item.price} - ${item.weight}g
-          </label>
-        </div>
-      `);
-    });
-  });
 
   // Place order
-  $('#order').click(function() {
+  $('#order').click(function () {
     let selected = [];
-    $('input:checked').each(function() {
+
+    $('input:checked').each(function () {
       selected.push(JSON.parse($(this).val()));
     });
 
     if (selected.length === 0) {
       alert('Please select at least one item');
-      return; 
+      return;
     }
 
     $.ajax({
       url: '/api/place-order',
       method: 'POST',
-      contentType: 'application/json',  
+      contentType: 'application/json',
       data: JSON.stringify(selected),
-      success: function(result) {
+      success: function (result) {
         $('#result').text(JSON.stringify(result, null, 2));
       }
     });
