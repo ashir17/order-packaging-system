@@ -50,13 +50,13 @@ $(document).ready(function() {
 
     if (selected.length === 0) {
       alert('Please select at least one item');
-      return;
+      return; 
     }
 
     $.ajax({
       url: '/api/place-order',
       method: 'POST',
-      contentType: 'application/json',
+      contentType: 'application/json',  
       data: JSON.stringify(selected),
       success: function(result) {
         $('#result').text(JSON.stringify(result, null, 2));
